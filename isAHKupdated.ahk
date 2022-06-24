@@ -3,7 +3,7 @@ AutoHotkey Version:     2.0-beta*
 Platform:               Win10 19042
 Author:                 JRW254
 Script Version:         1.0
-Script Function:    Check to see if you have latest version and if not download the newst version
+Script Function:    Check to see if you have latest version and if not download the newest version
 */
 
 
