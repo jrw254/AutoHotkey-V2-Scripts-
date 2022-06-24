@@ -6,6 +6,8 @@ Script Version:         1.0
 Script Function:    Check to see if you have latest version and if not download the newst version
 */
 
+
+
 filePath := "" ; put your destination path here
 isAHKupdated := ComObject("WinHttp.WinHttpRequest.5.1")
 isAHKupdated.Open("GET","https://autohotkey.com/download/2.0/version.txt", true)
