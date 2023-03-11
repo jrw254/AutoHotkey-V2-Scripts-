@@ -1,39 +1,56 @@
-#Requires AutoHotKey v2.0-beta
+/*
+    Version: 1.0.0
+    Date Created: Feb. 18th, 2023
+    Chnages:
+        March 10th, 2020 -- 1. Added Version Number ( 1.0.0 / prev. 0.1.0 ), date created, changes section
+                            2. Moved latestAHKVersion outside function. Serves as an example. 
+                            3. Some changes made to code: Added arguments. Slightly better calculation. 
+                            4. Some minor changes style and structure of doc. 
+    
+*/
 
 /*
     Scrolling Text Mock Up. Needs work but good bare bones. 
 */
 
-; MovingTextGUI(500)
+#Requires AutoHotKey v2.0-beta
 
-MovingTextGUI(movingText_Speed) {
-    SetTimer MoveText, movingText_Speed
-tickerGUI := Gui()
-tickerGUI.BackColor := "708090" ; Slate Grey
+; 0:: ExitApp
 
 latestAHKVersion := ComObject("WinHttp.WinHttpRequest.5.1")
 latestAHKVersion.Open("GET","https://autohotkey.com/download/2.0/version.txt", true)
 latestAHKVersion.Send()
 latestAHKVersion.WaitForResponse()
     movingText := "The Latest AutoHotkey v2 Version Number is: " . latestAHKVersion.ResponseText
-    ;movingText := "At around 2:30 a.m. (CST) on November 4, 2014,[152] an elite squadron of the Federal Police arrested former Iguala mayor Abarca and his wife Pineda at a house in the Tenorios neighborhood in Iztapalapa, Mexico City.[153][A 1] Neither of them resisted arrest.[155] Abarca confessed that he was tired of hiding and that the pressure was too much for him. His wife, on the other hand, showed her disdain for law enforcement.[156][157] The arrest was confirmed through Twitter by the Federal Police spokesperson José Ramón Salinas early that morning.[158] Once in custody, they were taken by law enforcement to the federal installations of SEIDO, Mexico's anti-organized crime investigation agency, for their legal declaration.[159] At the time of their arrest, Abarca and Pineda were among Mexico's most-wanted.[160][161]"
 
-/*
-Notes:
-    1. Width and Height needs to be calculated better
-    2. The example of movingText that is long produces a huge GUI. refer to #1
-*/
 
-textXpos := 0
-textLength := Strlen(movingText)
-    wh := tickerGUI.Add("Text", "w" . textLength*2 . " h" . textLength . " x" . textXpos, movingText )
-;ToolTip textLength
+MovingTextGUI(movingText, 500, 296, 1050)
+
+;==============================;
+        Function Below
+;==============================;
+MovingTextGUI(input_txt, movingText_Speed, xPOS, yPOS) {
+    SetTimer MoveText, movingText_Speed
+
+    movingText := input_txt
+    textLength := Strlen(movingText)
+
+    tickerGUI := Gui()
+        tickerGUI.Opt("-Caption")
+        tickerGUI.BackColor := "708090" ; Slate Grey
+            width := textLength*10  ; Calculate width based on string length
+            height := "15"    ; Calculate height based on string length ; Need a way to proper calc the textLength to height
+    
+    textXpos := 0
+        wh := tickerGUI.Add("Text", "w" width . " h" height . " x" textXpos, movingText )
+
 MoveText(*) {
     static textXpos := 0
+
     wh.Move(textXpos + 5)
-    textXpos += 5
-    if (textXpos >= textLength*2)  ; Check if we've reached the end.
-        textXpos := 0  ; If so, loop back to the start. Note: Add a negative nuber to have text start off screen. 
+        textXpos += 5
+    if (textXpos >= width)  ; Check if we've reached the end.
+            textXpos := 0  ; If so, loop back to the start. Note: Add a negative number to have text start off screen. 
 }
-    tickerGUI.Show()
+    tickerGUI.Show("x" xPOS . "y" yPOS)
 }
