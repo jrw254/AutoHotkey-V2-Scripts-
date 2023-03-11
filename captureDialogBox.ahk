@@ -1,6 +1,6 @@
 /*
 
-  Can't drop an image in Discord cause you new? Too lazy to use anything else to drop a link to get arond that limitation?
+  Can't drop an image in Discord cause you new? Too lazy to use anything else to drop a link to get around that limitation?
   Then welcome to captureDialogBox() Because why wouldn't we do things the long way around. 
   
 */
@@ -14,7 +14,7 @@ captureDialogBox() {
         A_Clipboard := outVar
     } else {
         If !WinExist("ahk_class #32770") {
-            MsgBox "No Dialog window is present.`nCause and error with an AHK script to see."
+            MsgBox "No Dialog window is present.`nCause an error with an AHK script to see."
         }
 
     }
