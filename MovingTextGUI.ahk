@@ -2,7 +2,7 @@
     Version: 1.0.0
     Date Created: Feb. 18th, 2023
     Chnages:
-        March 10th, 2020 -- 1. Added Version Number ( 1.0.0 / prev. 0.1.0 ), date created, changes section
+        March 10th, 2023 -- 1. Added Version Number ( 1.0.0 / prev. 0.1.0 ), date created, changes section
                             2. Moved latestAHKVersion outside function. Serves as an example. 
                             3. Some changes made to code: Added arguments. Slightly better calculation. 
                             4. Some minor changes style and structure of doc. 
